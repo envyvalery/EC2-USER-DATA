@@ -1,0 +1,13 @@
+When you create a new EC2 instance, paste this script into the User Data section (under Advanced details).  Read more here.
+
+This will install a web server and create a simple HTML page that displays “Hello World!” and the host name of the EC2 instance.  This script will run the first time (and only) this server boots up.
+
+
+#!/bin/bash
+# User data for new EC2 instances
+# install httpd (Linux 2 version)
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+echo "<h1>Hello World!  This is $(hostname -f)</h1>" > /var/www/html/index.html
